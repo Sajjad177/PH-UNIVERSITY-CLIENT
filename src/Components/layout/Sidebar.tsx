@@ -13,7 +13,7 @@ const userRole = {
 
 const Sidebar = () => {
   // chenging user role by static way and show it in sidebar 
-  const role = "faculty";
+  const role = "admin";
   let sidebarItems;
 
   switch (role) {

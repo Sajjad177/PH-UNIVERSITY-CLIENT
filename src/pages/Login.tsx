@@ -21,9 +21,8 @@ const Login = () => {
       password: data.password,
     };
     const res = await login(userInfo).unwrap();
-    // console.log("res => ", res);
     const user = verifyToken(res.data.accessToken);
-    console.log("user => ", user);
+    
     dispatch(setUser({ user: user, token: res.data.accessToken }));
   };
 
