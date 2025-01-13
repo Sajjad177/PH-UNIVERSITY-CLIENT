@@ -1,24 +1,34 @@
-import { Button } from "antd";
-import { FieldValues, useForm } from "react-hook-form";
+import { Button, Row } from "antd";
+import { FieldValues } from "react-hook-form";
 import { useLoginMutation } from "../redux/features/auth/authApi";
 import { useAppDispatch } from "../redux/hook";
 import { setUser, TUser } from "../redux/features/auth/authSlice";
 import { verifyToken } from "../utils/verifyToken";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import PHForm from "../Components/form/PHForm";
+import PHInput from "../Components/form/PHInput";
 
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { register, handleSubmit } = useForm({
-    defaultValues: {
-      id: "A-0001",
-      password: "admin12345",
-    },
-  });
+  // const { register } = useForm({
+  //   defaultValues: {
+  //     id: "A-0001",
+  //     password: "admin12345",
+  //   },
+  // });
+
+  const defaultValues = {
+    id: "A-0001",
+    password: "admin12345",
+  };
+  
+
   const [login] = useLoginMutation();
 
   const onSubmit = async (data: FieldValues) => {
+    console.log(data);
     const toastId = toast.loading("Login in progress");
 
     try {
@@ -40,19 +50,13 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <label htmlFor="id">ID</label>
-          <input type="text" id="id" {...register("id")} />
-        </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <input type="text" id="password" {...register("password")} />
-        </div>
+    <Row justify="center" align="middle" style={{ height: "100vh" }}>
+      <PHForm onSubmit={onSubmit} defaultValues={defaultValues}>
+        <PHInput type="text" name="id" label={"ID"} />
+        <PHInput type="text" name="password" label={"Password"} />
         <Button htmlType="submit">Login</Button>
-      </form>
-    </div>
+      </PHForm>
+    </Row>
   );
 };
 
