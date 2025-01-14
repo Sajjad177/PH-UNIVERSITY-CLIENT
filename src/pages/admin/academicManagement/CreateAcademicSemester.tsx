@@ -4,6 +4,11 @@ import { Button, Col, Flex } from "antd";
 import PHSelect from "../../../Components/form/PHSelect";
 import { semesterOptions } from "../../../constants/semester";
 import { monthOptions } from "../../../constants/global";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { academicSemesterSchema } from "../../../schemas/academicManagementSchema";
+import { useAddAcademicSemestersMutation } from "../../../redux/features/admin/academicManagement.api";
+import { toast } from "sonner";
+import { TResponse } from "../../../types/global";
 
 const currentYear = new Date().getFullYear();
 
@@ -13,7 +18,11 @@ const yearOptions = [0, 1, 2, 3, 4].map((number) => ({
 }));
 
 const CreateAcademicSemester = () => {
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+  const [addAcademicSemesters] = useAddAcademicSemestersMutation();
+
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    const toastId = toast.loading("Creating Academic Semester...");
+
     const name = semesterOptions[Number(data.name) - 1]?.label;
     const semesterData = {
       name,
@@ -22,13 +31,30 @@ const CreateAcademicSemester = () => {
       startMonth: data.startMonth,
       endMonth: data.endMonth,
     };
-    console.log(semesterData);
+
+    try {
+      const res = (await addAcademicSemesters(semesterData)) as TResponse;
+      console.log(res);
+      if (res.error) {
+        toast.error(res.error.data.message, { id: toastId });
+      } else {
+        toast.success(res.data.message, { id: toastId });
+      }
+
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+      toast.error("Something went wrong", { id: toastId });
+    }
   };
 
   return (
     <Flex justify="center" align="center">
       <Col span={6}>
-        <PHForm onSubmit={onSubmit as SubmitHandler<FieldValues>}>
+        <PHForm
+          onSubmit={onSubmit as SubmitHandler<FieldValues>}
+          resolver={zodResolver(academicSemesterSchema)}
+        >
           <PHSelect label={"Name"} name={"name"} options={semesterOptions} />
           <PHSelect label={"Year"} name={"year"} options={yearOptions} />
           <PHSelect
