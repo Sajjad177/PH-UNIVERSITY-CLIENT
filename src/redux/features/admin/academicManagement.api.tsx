@@ -1,3 +1,5 @@
+import { TQueryParams, TResponseRedux } from "../../../types";
+import { TAcademicSemester } from "../../../types/academicManagementType";
 import { baseApi } from "../../api/baseApi";
 
 const academicManagementApi = baseApi.injectEndpoints({
@@ -10,12 +12,23 @@ const academicManagementApi = baseApi.injectEndpoints({
       }),
     }),
     getAllSemesters: builder.query({
-      query: () => ({
-        url: "/academic-semesters",
-        method: "GET",
-      }),
+      query: (args) => {
+        // filtering query :
+        const params = new URLSearchParams();
+        if (args) {
+          args.forEach((item: TQueryParams) => {
+            params.append(item.name as string, item.value as string);
+          });
+        }
+
+        return {
+          url: "/academic-semesters",
+          method: "GET",
+          params: params,
+        };
+      },
       // transformResponse use for getting data from server and store in redux.
-      transformResponse: (response) => {
+      transformResponse: (response: TResponseRedux<TAcademicSemester[]>) => {
         return {
           data: response.data,
           meta: response.meta,
