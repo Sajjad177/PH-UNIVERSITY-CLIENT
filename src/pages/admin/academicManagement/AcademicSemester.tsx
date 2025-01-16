@@ -13,6 +13,8 @@ const AcademicSemester = () => {
   const [params, setParams] = useState<TQueryParams[] | undefined>(undefined);
   const { data: semesterData, isFetching } = useGetAllSemestersQuery(params);
 
+  console.log(semesterData);
+
   const tableData = semesterData?.data?.map(
     ({ _id, name, code, year, startMonth, endMonth }) => ({
       key: _id,
@@ -86,16 +88,16 @@ const AcademicSemester = () => {
       dataIndex: "endMonth",
     },
     {
-      title : "Action",
+      title: "Action",
       key: "action",
       render: () => {
         return (
           <div>
-          <Button type="primary">Edit</Button>
+            <Button type="primary">Edit</Button>
           </div>
-        )
-      }
-    }
+        );
+      },
+    },
   ];
 
   const onChange: TableProps<TTableData>["onChange"] = (
@@ -122,10 +124,6 @@ const AcademicSemester = () => {
       setParams(queryParams);
     }
   };
-
-  // if (isLoading) {
-  //   return <p>Loading...</p>;
-  // }
 
   return (
     <Table<TTableData>

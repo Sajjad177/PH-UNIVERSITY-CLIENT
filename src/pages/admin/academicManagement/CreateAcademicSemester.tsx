@@ -8,10 +8,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { academicSemesterSchema } from "../../../schemas/academicManagementSchema";
 import { useAddAcademicSemestersMutation } from "../../../redux/features/admin/academicManagement.api";
 import { toast } from "sonner";
-import { TResponse } from "../../../types/global";
+import { TResponse } from "../../../types";
 
+// this is for years options
 const currentYear = new Date().getFullYear();
-
 const yearOptions = [0, 1, 2, 3, 4].map((number) => ({
   value: String(currentYear + number).toString(),
   label: String(currentYear + number).toString(),
@@ -23,6 +23,7 @@ const CreateAcademicSemester = () => {
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const toastId = toast.loading("Creating Academic Semester...");
 
+    // get name from options array by index
     const name = semesterOptions[Number(data.name) - 1]?.label;
     const semesterData = {
       name,
