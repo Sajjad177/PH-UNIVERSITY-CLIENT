@@ -40,7 +40,7 @@ const AcademicFaculty = () => {
     extra
   ) => {
     console.log("onChange", _pagination, filters, _sorter, extra);
-    // there are no filters available in this table and backend side.
+    // filter query condition added later in there
   };
 
   return (

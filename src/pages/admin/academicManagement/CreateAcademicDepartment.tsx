@@ -18,13 +18,10 @@ const CreateAcademicDepartment = () => {
     label: name,
   }));
 
-  console.log(facultyDataList);
-
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const toastId = toast.loading("Creating Academic Department...");
     try {
       const res = (await addAcademicManagement(data)) as TResponse;
-      console.log(res);
 
       if (res.error) {
         toast.error(res.error.data.message, { id: toastId });
