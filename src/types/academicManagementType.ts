@@ -17,3 +17,4 @@ export type TAcademicFaculty = {
   updateAt: string;
   __V: number;
 }
+

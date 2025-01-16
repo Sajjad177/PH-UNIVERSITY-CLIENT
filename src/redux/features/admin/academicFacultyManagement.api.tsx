@@ -13,10 +13,10 @@ const academicFacultyManagement = baseApi.injectEndpoints({
       query: () => ({
         url: "/academic-faculties",
         method: "GET",
-        
       }),
     }),
   }),
 });
 
-export const { useAddAcademicFacultyMutation, useGetAllFacultyQuery } = academicFacultyManagement;
+export const { useAddAcademicFacultyMutation, useGetAllFacultyQuery } =
+  academicFacultyManagement;

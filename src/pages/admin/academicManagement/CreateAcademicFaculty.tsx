@@ -5,6 +5,8 @@ import { FieldValues, SubmitHandler } from "react-hook-form";
 import { useAddAcademicFacultyMutation } from "../../../redux/features/admin/academicFacultyManagement.api";
 import { toast } from "sonner";
 import { TResponse } from "../../../types";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { academicFacultySchema } from "../../../schemas/academicManagementSchema";
 
 const CreateAcademicFaculty = () => {
   const [addAcademicFaculty] = useAddAcademicFacultyMutation();
@@ -28,7 +30,7 @@ const CreateAcademicFaculty = () => {
 
   return (
     <Flex justify="center" align="center">
-      <PHForm onSubmit={onSubmit}>
+      <PHForm onSubmit={onSubmit} resolver={zodResolver(academicFacultySchema)}>
         <PHInput type="text" name="name" label="Name" />
         <Button type="primary" htmlType="submit">
           Submit
