@@ -1,13 +1,13 @@
-import CreateStudent from "../pages/admin/CreateStudent.tsx";
-import CreateFaculty from "../pages/admin/CreateFaculty.tsx";
-import AdminDashboard from "../pages/admin/AdminDashboard.tsx";
-import CreateAdmin from "../pages/admin/CreateAdmin.tsx";
-import AcademicSemester from "../pages/admin/academicManagement/AcademicSemester.tsx";
-import CreateAcademicSemester from "../pages/admin/academicManagement/CreateAcademicSemester.tsx";
-import CreateAcademicFaculty from "../pages/admin/academicManagement/CreateAcademicFaculty.tsx";
-import AcademicFaculty from "../pages/admin/academicManagement/AcademicFaculty.tsx";
-import CreateAcademicDepartment from "../pages/admin/academicManagement/CreateAcademicDepartment.tsx";
 import AcademicDepartment from "../pages/admin/academicManagement/AcademicDepartment.tsx";
+import AcademicFaculty from "../pages/admin/academicManagement/AcademicFaculty.tsx";
+import AcademicSemester from "../pages/admin/academicManagement/AcademicSemester.tsx";
+import CreateAcademicDepartment from "../pages/admin/academicManagement/CreateAcademicDepartment.tsx";
+import CreateAcademicFaculty from "../pages/admin/academicManagement/CreateAcademicFaculty.tsx";
+import CreateAcademicSemester from "../pages/admin/academicManagement/CreateAcademicSemester.tsx";
+import AdminDashboard from "../pages/admin/AdminDashboard.tsx";
+import CreateAdmin from "../pages/admin/userManagement/CreateAdmin.tsx";
+import CreateFaculty from "../pages/admin/userManagement/CreateFaculty.tsx";
+import CreateStudent from "../pages/admin/userManagement/CreateStudent.tsx";
 
 export const adminPaths = [
   {
