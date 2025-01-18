@@ -1,7 +1,7 @@
-import { FieldValues, SubmitHandler } from "react-hook-form";
+import { Controller, FieldValues, SubmitHandler } from "react-hook-form";
 import PHForm from "../../../Components/form/PHForm";
 import PHInput from "../../../Components/form/PHInput";
-import { Button, Col, Divider, Row } from "antd";
+import { Button, Col, Divider, Form, Input, Row } from "antd";
 import PHDatePicker from "../../../Components/form/PHDatePicker";
 import PHSelect from "../../../Components/form/PHSelect";
 import { useGetAllSemestersQuery } from "../../../redux/features/admin/academicManagement.api";
@@ -102,6 +102,7 @@ const CreateStudent = () => {
     };
     const formData = new FormData();
     formData.append("data", JSON.stringify(studentData));
+    formData.append("file", data.profileImage);
     addStudent(formData);
   };
 
@@ -131,6 +132,21 @@ const CreateStudent = () => {
             </Col>
             <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
               <PHInput type="text" name="bloodGroup" label="Blood Group" />
+            </Col>
+            <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
+              <Controller
+                name="profileImage"
+                render={({ field: { onChange, value, ...field } }) => (
+                  <Form.Item label="Profile Image">
+                    <Input
+                      type="file"
+                      value={value?.fileName}
+                      {...field}
+                      onChange={(e) => onChange(e.target.files?.[0])}
+                    />
+                  </Form.Item>
+                )}
+              />
             </Col>
           </Row>
           <Divider style={{ marginTop: 0, fontSize: "1.5rem" }}>
@@ -239,13 +255,6 @@ const CreateStudent = () => {
                 options={depatmentDataOptions}
               />
             </Col>
-            {/* <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
-              <PHSelect
-                name="academicFaculty"
-                label="Admission Faculty"
-                options={facultyDataOptions}
-              />
-            </Col> */}
           </Row>
           <Button type="primary" htmlType="submit">
             Submit
