@@ -8,6 +8,7 @@ import AdminDashboard from "../pages/admin/AdminDashboard.tsx";
 import CreateAdmin from "../pages/admin/userManagement/CreateAdmin.tsx";
 import CreateFaculty from "../pages/admin/userManagement/CreateFaculty.tsx";
 import CreateStudent from "../pages/admin/userManagement/CreateStudent.tsx";
+import StudentData from "../pages/admin/userManagement/StudentData.tsx";
 
 export const adminPaths = [
   {
@@ -67,6 +68,11 @@ export const adminPaths = [
         name: "Create Student",
         path: "create-student",
         element: <CreateStudent />,
+      },
+      {
+        name: "Students",
+        path: "students-data",
+        element: <StudentData />,
       },
     ],
   },

@@ -2,11 +2,10 @@ import { Button, Table, TableColumnsType, TableProps } from "antd";
 import { useGetAllFacultyQuery } from "../../../redux/features/admin/academicFacultyManagement.api";
 import { TAcademicFaculty } from "../../../types/academicManagementType";
 
-export type TTableData = Pick<TAcademicFaculty, "name">;
+export type TTableData = Pick<TAcademicFaculty, "_id" | "name">;
 
 const AcademicFaculty = () => {
   const { data: facultyData, isFetching } = useGetAllFacultyQuery(undefined);
-  console.log(facultyData);
 
   const tableData = facultyData?.data?.map(({ _id, name }) => ({
     key: _id,

@@ -1,3 +1,4 @@
+import { TQueryParams, TResponseRedux, TStudent } from "../../../types";
 import { baseApi } from "../../api/baseApi";
 
 const userManagementApi = baseApi.injectEndpoints({
@@ -9,7 +10,32 @@ const userManagementApi = baseApi.injectEndpoints({
         body: data,
       }),
     }),
+    getAllStudents: builder.query({
+      query: (args) => {
+        // filtering query :
+        const params = new URLSearchParams();
+        if (args) {
+          args.forEach((item: TQueryParams) => {
+            params.append(item.name as string, item.value as string);
+          });
+        }
+
+        return {
+          url: "/students",
+          method: "GET",
+          params: params,
+        };
+      },
+      // transformResponse use for getting data from server and store in redux.
+      transformResponse: (response: TResponseRedux<TStudent[]>) => {
+        return {
+          data: response.data,
+          meta: response.meta,
+        };
+      },
+    }),
   }),
 });
 
-export const { useAddStudentMutation } = userManagementApi;
+export const { useAddStudentMutation, useGetAllStudentsQuery } =
+  userManagementApi;
