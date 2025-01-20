@@ -8,23 +8,25 @@ import {
 } from "antd";
 import { useState } from "react";
 import { TQueryParams, TStudent } from "../../../types";
-import { useGetAllStudentsQuery } from "../../../redux/features/admin/userManagement.api";
+import { useGetAllFacultyDataQuery } from "../../../redux/features/admin/userManagement.api";
 import { Link } from "react-router-dom";
 
 export type TTableData = Pick<TStudent, "fullName" | "id" | "email">;
 
-const StudentData = () => {
+const FacultyData = () => {
   const [page, setPage] = useState(1);
   const [params, setParams] = useState<TQueryParams[]>([]);
-  const { data: studentData, isFetching } = useGetAllStudentsQuery([
+  const { data: facultyData, isFetching } = useGetAllFacultyDataQuery([
     { name: "page", value: page },
     { name: "sort", value: "-createdAt" }, // there is sort by createdAt field
     ...params,
   ]);
 
-  const metaData = studentData?.meta;
+  console.log(facultyData);
 
-  const tableData = studentData?.data?.map(({ _id, fullName, id, email }) => ({
+  const metaData = facultyData?.meta;
+
+  const tableData = facultyData?.data?.map(({ _id, fullName, id, email }) => ({
     key: _id,
     fullName,
     id,
@@ -39,7 +41,7 @@ const StudentData = () => {
       showSorterTooltip: { target: "full-header" },
     },
     {
-      title: "Student Id",
+      title: "Faculty Id",
       key: "id",
       dataIndex: "id",
       showSorterTooltip: { target: "full-header" },
@@ -59,9 +61,7 @@ const StudentData = () => {
         return (
           <Space>
             <Button type="primary">Update</Button>
-            <Link to={`/admin/student-data/${item.key}`}>
-              <Button type="primary">Details</Button>
-            </Link>
+            <Button type="primary">Details</Button>
             <Button
               style={{ backgroundColor: "red", color: "white", border: "none" }}
             >
@@ -119,4 +119,4 @@ const StudentData = () => {
   );
 };
 
-export default StudentData;
+export default FacultyData;
