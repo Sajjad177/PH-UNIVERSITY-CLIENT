@@ -42,6 +42,7 @@ const CreateFaculty = () => {
   }));
 
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    const toastId = toast.loading("Creating Faculty...", );
     try {
       const facultyData = {
         password: "111111111111111",
@@ -49,11 +50,12 @@ const CreateFaculty = () => {
       };
       const formData = new FormData();
       formData.append("data", JSON.stringify(facultyData));
+      formData.append("file", data.profileImage);
       await addFaculty(formData);
-      toast.success("Faculty added successfully");
+      toast.success("Faculty added successfully", { id: toastId });
     } catch (error) {
       console.log(error);
-      toast.error("Something went wrong");
+      toast.error("Something went wrong", { id: toastId });
     }
   };
 
