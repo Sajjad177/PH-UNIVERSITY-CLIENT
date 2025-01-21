@@ -75,6 +75,30 @@ const userManagementApi = baseApi.injectEndpoints({
         body: data,
       }),
     }),
+    // getAllAdminData: builder.query({
+    //   query: (args) => {
+    //     // filtering query :
+    //     const params = new URLSearchParams();
+    //     if (args) {
+    //       args.forEach((item: TQueryParams) => {
+    //         params.append(item.name as string, item.value as string);
+    //       });
+    //     }
+
+    //     return {
+    //       url: "/faculties",
+    //       method: "GET",
+    //       params: params,
+    //     };
+    //   },
+    //   // transformResponse use for getting data from server and store in redux.
+    //   transformResponse: (response: TResponseRedux<TStudent[]>) => {
+    //     return {
+    //       data: response.data,
+    //       meta: response.meta,
+    //     };
+    //   },
+    // }),
   }),
 });
 
@@ -84,4 +108,5 @@ export const {
   useAddFacultyMutation,
   useGetAllFacultyDataQuery,
   useAddAdminMutation,
+  // useGetAllAdminDataQuery,
 } = userManagementApi;

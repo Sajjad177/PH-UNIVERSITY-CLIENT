@@ -3,33 +3,8 @@ import PHForm from "../../../Components/form/PHForm";
 import PHInput from "../../../Components/form/PHInput";
 import { Button, Col, Divider, Form, Input, Row } from "antd";
 import PHDatePicker from "../../../Components/form/PHDatePicker";
-import {
-  useAddAdminMutation,
-  useAddFacultyMutation,
-} from "../../../redux/features/admin/userManagement.api";
+import { useAddAdminMutation } from "../../../redux/features/admin/userManagement.api";
 import { toast } from "sonner";
-
-const adminValue = {
-  password: "admin12345",
-  admin: {
-    designation: "Admin",
-    name: {
-      firstName: "sajjad",
-      middleName: "A",
-      lastName: "Hossain",
-    },
-    gender: "male",
-    dateOfBirth: "1985-05-20T00:00:00.000Z",
-    email: "sajjadsajjad098765@gmail.com",
-    contactNo: "+1234567890",
-    emergencyContactNo: "+0987654321",
-    bloodGroup: "O+",
-    presentAddress: "123 Street Name, City, Country",
-    permanentAddress: "456 Another St, City, Country",
-    isDeleted: false,
-    fullName: "sajjad A Doe",
-  },
-};
 
 // only for devlopment and remove it
 const adminDefaultValue = {

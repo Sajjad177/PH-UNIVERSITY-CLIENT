@@ -7,11 +7,10 @@ import {
   TableProps,
 } from "antd";
 import { useState } from "react";
-import { TQueryParams, TStudent } from "../../../types";
+import { TFaculty, TQueryParams } from "../../../types";
 import { useGetAllFacultyDataQuery } from "../../../redux/features/admin/userManagement.api";
-import { Link } from "react-router-dom";
 
-export type TTableData = Pick<TStudent, "fullName" | "id" | "email">;
+export type TTableData = Pick<TFaculty, "fullName" | "id" | "email">;
 
 const FacultyData = () => {
   const [page, setPage] = useState(1);
@@ -22,10 +21,7 @@ const FacultyData = () => {
     ...params,
   ]);
 
-  console.log(facultyData);
-
   const metaData = facultyData?.meta;
-
   const tableData = facultyData?.data?.map(({ _id, fullName, id, email }) => ({
     key: _id,
     fullName,
