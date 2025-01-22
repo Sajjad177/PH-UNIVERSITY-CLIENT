@@ -70,7 +70,7 @@ const baseQueryWithRefreshToken: BaseQueryFn<
 export const baseApi = createApi({
   reducerPath: "baseApi",
   baseQuery: baseQueryWithRefreshToken,
-  tagTypes: ["semester"], // tagTypes added in authApi for invalidating cache
+  tagTypes: ["semester", "courses"], // tagTypes added in authApi for invalidating cache
   // endpoints added in authApi:
   endpoints: () => ({}),
 });

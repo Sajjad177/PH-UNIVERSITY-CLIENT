@@ -104,19 +104,3 @@ export interface Name {
   _id: string;
 }
 
-// export interface AcademicDepartment {
-//   _id: string;
-//   name: string;
-//   academicFaculty: string;
-//   createdAt: string;
-//   updatedAt: string;
-//   __v: number;
-// }
-
-// export interface AcademicFaculty {
-//   _id: string;
-//   name: string;
-//   createdAt: string;
-//   updatedAt: string;
-//   __v: number;
-// }
