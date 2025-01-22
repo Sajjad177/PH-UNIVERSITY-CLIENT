@@ -1,3 +1,4 @@
+import { TQueryParams, TResponseRedux, TSemester } from "../../../types";
 import { baseApi } from "../../api/baseApi";
 
 const courseManagementApi = baseApi.injectEndpoints({
@@ -8,32 +9,45 @@ const courseManagementApi = baseApi.injectEndpoints({
         method: "POST",
         body: data,
       }),
+      invalidatesTags: ["semester"],
     }),
-    // getAllSemesters: builder.query({
-    //   query: (args) => {
-    //     // filtering query :
-    //     const params = new URLSearchParams();
-    //     if (args) {
-    //       args.forEach((item: TQueryParams) => {
-    //         params.append(item.name as string, item.value as string);
-    //       });
-    //     }
+    getAllRegisteredSemesters: builder.query({
+      query: (args) => {
+        const params = new URLSearchParams();
 
-    //     return {
-    //       url: "/academic-semesters",
-    //       method: "GET",
-    //       params: params,
-    //     };
-    //   },
-    //   // transformResponse use for getting data from server and store in redux.
-    //   transformResponse: (response: TResponseRedux<TAcademicSemester[]>) => {
-    //     return {
-    //       data: response.data,
-    //       meta: response.meta,
-    //     };
-    //   },
-    // }),
+        if (args) {
+          args.forEach((item: TQueryParams) => {
+            params.append(item?.name as string, item.value as string);
+          });
+        }
+
+        return {
+          url: "/semester-registrations",
+          method: "GET",
+          params: params,
+        };
+      },
+      providesTags: ["semester"],
+      transformResponse: (response: TResponseRedux<TSemester[]>) => {
+        return {
+          data: response.data,
+          meta: response.meta,
+        };
+      },
+    }),
+    updateRegisteredSemester: builder.mutation({
+      query: (args) => ({
+        url: `/semester-registrations/${args.id}`,
+        method: "PATCH",
+        body: args.data,
+      }),
+      invalidatesTags: ["semester"],
+    }),
   }),
 });
 
-export const { useAddRegisteredSemesterMutation } = courseManagementApi;
+export const {
+  useAddRegisteredSemesterMutation,
+  useGetAllRegisteredSemestersQuery,
+  useUpdateRegisteredSemesterMutation,
+} = courseManagementApi;

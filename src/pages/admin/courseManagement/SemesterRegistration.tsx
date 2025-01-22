@@ -52,7 +52,6 @@ const SemesterRegistration = () => {
             name="academicSemester"
             options={academicSemesterOptions}
           />
-
           <PHSelect
             name="status"
             label="Status"
